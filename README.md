@@ -101,8 +101,7 @@ The **Processed Data** and **Trained Models** are required for fast inference:
 
 ```bash
 # Clone the repository
-git clone [PLACEHOLDER: YOUR_REPO_LINK]
-cd [PLACEHOLDER: YOUR_REPO_NAME]
+git clone gh repo clone vp763/Image-Captioning-and-Segmentation
 
 # Install all Python dependencies (e.g., from requirements.txt)
 pip install -r requirements.txt
