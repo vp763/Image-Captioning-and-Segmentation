@@ -1,0 +1,11 @@
+torch
+torchvision
+segmentation-models-pytorch
+tensorflow
+keras
+opencv-python
+numpy
+matplotlib
+pillow
+tqdm
+scikit-learn
