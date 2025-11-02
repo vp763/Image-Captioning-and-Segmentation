@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Analysis Project Submission</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; text-align: center; background-color: #f4f4f9; }
+        .container { 
+            max-width: 900px; margin: 50px auto; padding: 30px; 
+            border: 1px solid #ddd; border-radius: 10px; 
+            background-color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 { color: #007bff; margin-bottom: 20px; }
+        .upload-form { margin-bottom: 30px; }
+        .upload-form input[type="file"], .upload-form button {
+            padding: 10px 15px; margin: 5px; border-radius: 5px; border: 1px solid #ccc;
+        }
+        .upload-form button { 
+            background-color: #28a745; 
+            color: white; 
+            cursor: pointer; 
+            border: none;
+            font-weight: bold;
+        }
+        #results { margin-top: 30px; border-top: 2px solid #007bff; padding-top: 20px; }
+        .image-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .image-display { 
+            margin: 15px; 
+            border: 1px solid #eee; 
+            padding: 15px; 
+            display: inline-block; 
+            width: 45%; 
+            min-width: 250px;
+        }
+        .image-display img { 
+            max-width: 100%; 
+            height: auto; 
+            display: block; 
+            margin: 0 auto; 
+            border-radius: 5px; 
+        }
+        .caption { 
+            font-size: 1.4em; 
+            font-weight: bold; 
+            margin-top: 20px; 
+            color: #333; 
+            background-color: #e9f7ff; 
+            padding: 10px; 
+            border-radius: 5px; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🖼️ Image Segmentation & Captioning</h1>
+        <p>Upload an image (PNG, JPG, or JPEG) to run the analysis.</p>
+
+        <form class="upload-form" method="POST" action="/analyze" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/png, image/jpeg, image/jpg" required>
+            <button type="submit">Start Analysis</button>
+        </form>
+
+        {% if filename %}
+        <div id="results">
+            <h2>Analysis Complete!</h2>
+            
+            <div class="caption">
+                Generated Caption: <strong>{{ caption }}</strong>
+            </div>
+
+            <div class="image-container">
+                <div class="image-display">
+                    <h3>Original Image</h3>
+                    <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Original Image">
+                </div>
+
+                <div class="image-display">
+                    <h3>Segmentation Mask</h3>
+                    <img src="{{ url_for('uploaded_file', filename='mask_' + filename) }}" alt="Segmentation Mask">
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <p style="color: red; margin-top: 20px;">Error: {{ error }}</p>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
