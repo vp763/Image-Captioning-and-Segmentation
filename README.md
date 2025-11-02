@@ -43,31 +43,59 @@ Our pipeline works like a **"Photographer and a Poet"**:
 
 ---
 
-## 💡 3. Setup and Execution
+# 3. Setup and Execution
 
-To run this project on your local machine or a cloud instance, follow these steps. **(No Kaggle/Drive setup needed post-training!)**
+To run this project on your local machine or a cloud instance, follow these steps.
 
-### A. Data Preparation (Initial Setup Only)
+---
 
-1.  Create a **`data/`** directory in the project root.
-2.  Inside `data/`, place the **Flickr8k Dataset** in the structure expected by the code:
-    ```
-    /data/
-    ├── Flickr8k_Dataset/  (All .jpg files)
-    └── Flickr8k_text/
-        └── Flickr8k.token.txt
-    ```
+### A. Data Acquisition Strategy (Choose ONE Method)
+
+This project requires **PASCAL VOC 2012** (Segmentation) and **Flickr8k** (Captioning).
+
+#### Option 1: Automated Download (Recommended for Training)
+
+We use a single Python script (`data_download.ipynb`) to manage both datasets via the Kaggle API.
+
+1.  **Kaggle API Key Setup (MANDATORY):**
+    * Go to your **Kaggle profile** -> **Account** tab.
+    * Download **`kaggle.json`** and place it in your local **`~/.kaggle/`** directory.
+
+2.  **Execute Download Script:**
+    * Run the file **`notebooks/data_download.ipynb`**. This script will:
+        * Download and unzip **PASCAL VOC 2012** (Images & Masks).
+        * Download and unzip **Flickr8k** (Images & Captions).
+        * Place all files into the required **`data/`** directory structure.
+
+#### Option 2: Shared Drive Access (Fastest for Inference/Demo)
+
+If you have access to a shared Google Drive folder containing the pre-processed data and models (like the one you mentioned), follow these steps:
+
+1.  **Add to My Drive:** Access the shared project folder and use the **"Add to My Drive"** or **"Add shortcut to Drive"** option. **CRITICALLY**, ensure the shortcut is placed in the **root** of your main Google Drive.
+2.  **Mount Drive:** In your Colab/Jupyter notebook, run the code to mount Google Drive.
+3.  **Update Paths:** Change the paths in **Cell 1** to point to the Drive location (e.g., `/content/drive/MyDrive/Shared_Project_Folder/...`).
+
+Access Link : https://drive.google.com/drive/folders/1KQ7_V7fhGaBu--4dT0MGIPPTe8cCq4eI?usp=drive_link
+---
+
+### B. Pre-Trained Artifacts (Inference Ready)
+
+For immediate inference, the following processed files must be present:
+
+1.  Create a **`models/`** directory.
+2.  Place the following files (generated after training) inside:
+    * **`best_unet_model.pth`**
+    * **`best_transformer_model.keras`**
+    * **`tokenizer.pkl`** (Created from Flickr8k captions)
+    * **`features.pkl`** (Xception features of Flickr8k images)
+
+---
+... (rest of the README)
 
 ### B. Pre-Trained Artifacts
 
-The **Processed Data** and **Trained Models** are required for inference:
-
-1.  Create a **`models/`** directory.
-2.  Place the following files (generated during the training phase) inside:
-    * **`best_unet_model.pth`**
-    * **`best_transformer_model.keras`**
-    * **`tokenizer.pkl`**
-    * **`features.pkl`** (Processed image features - **CRITICAL** for fast loading)
+The **Processed Data** and **Trained Models** are required for fast inference:
+... (rest of the content remains the same)
 
 ### C. Local Installation & Run
 
